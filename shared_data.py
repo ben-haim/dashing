@@ -16,6 +16,9 @@ from multiprocessing import Manager, Process
 import os, sys
 
 DATA_POINTS = 100
+PIXEL_CHANGE = 2
+SPEED_FEEDS = 20
+SPEED_STOCKS = 10
 
 if 'drv_libxml2' in feedparser.PREFERRED_XML_PARSERS:
 	feedparser.PREFERRED_XML_PARSERS.remove('drv_libxml2')

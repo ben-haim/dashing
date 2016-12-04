@@ -292,7 +292,7 @@ class tk_dashing(tk_window):
 
 	def scroll_ticker(self, widget, ticker_text, pixel_old):
 		widget_txt = widget.get(1.0, END)[0:-1]
-		widget.xview_scroll(1, "pixel")
+		widget.xview_scroll(shared_data.PIXEL_CHANGE, "pixel")
 
 		ret = None
 
@@ -315,7 +315,7 @@ class tk_dashing(tk_window):
 		return ret
 
 	def scroll_headlines(self):
-		self._headtick_pixels += 1
+		self._headtick_pixels += shared_data.PIXEL_CHANGE
 		ret = self.scroll_ticker(
 			self._txt_headtick, self._headlines, self._headtick_pixelold
 		)
@@ -324,7 +324,7 @@ class tk_dashing(tk_window):
 		elif ret == 'reset':
 			self._headtick_pixels = self._headtick_pixelold
 
-		self.master.after(10, self.scroll_headlines)
+		self.master.after(shared_data.SPEED_FEEDS, self.scroll_headlines)
 
 	def scroll_stocks(self):
 		self._stocktick_pixels += 1
@@ -339,7 +339,7 @@ class tk_dashing(tk_window):
 		if ret is not None:
 			self.tag_stocks()
 
-		self.master.after(5, self.scroll_stocks)
+		self.master.after(shared_data.SPEED_STOCKS, self.scroll_stocks)
 
 	def update_headlines(self):
 		shared_data.update_headlines_threaded()
