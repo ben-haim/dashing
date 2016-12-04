@@ -15,7 +15,7 @@ from math import ceil, sqrt
 from multiprocessing import Manager, Process
 import os, sys
 
-DATA_POINTS = 40
+DATA_POINTS = 100
 
 if 'drv_libxml2' in feedparser.PREFERRED_XML_PARSERS:
 	feedparser.PREFERRED_XML_PARSERS.remove('drv_libxml2')
@@ -24,6 +24,8 @@ if 'drv_libxml2' in feedparser.PREFERRED_XML_PARSERS:
 manager = Manager()
 headlines = manager.list()
 quotes = manager.list()
+feeds = []
+stocks_list = []
 
 # configuration grab
 cp = ConfigParser.SafeConfigParser()
@@ -33,9 +35,11 @@ cp.read(os.path.join(
 	'dashing.conf'
 ))
 
-feeds = []
-stocks_list = []
+# config datapoints count
+if cp.has_option('general', 'data_points'):
+	DATA_POINTS = int(cp.get('general', 'data_points'))
 
+# config feeds
 i = 0
 while cp.has_option('headlines', 'feeds{}'.format(i)):
 	val = cp.get('headlines', 'feeds{}'.format(i))
@@ -48,6 +52,7 @@ while cp.has_option('headlines', 'feeds{}'.format(i)):
 	feeds.append((name, url))
 	i += 1
 
+# config stocks
 i = 0
 while cp.has_option('stocks', 'tickers{}'.format(i)):
 	val = cp.get('stocks', 'tickers{}'.format(i))
