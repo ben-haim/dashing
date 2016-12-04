@@ -137,13 +137,15 @@ class tk_dashing(tk_window):
 			quote_group = shared_data.quotes[i]
 
 			for j in range(0, len(quote_group)):
+				price_low = price_high = price_open = 0
+
 				if (
 					not match("^[0-9\.]+$", quote_group[j]['last']) and
 					not match("^[0-9\.]+$", quote_group[j]['open']) and
 					not match("^[0-9\.]+$", quote_group[j]['low']) and
 					not match("^[0-9\.]+$", quote_group[j]['high'])
 				):
-					price_high = price_low = price_open = float(
+					price_low = price_high = price_open = float(
 						quote_group[j]['open']
 					)
 
