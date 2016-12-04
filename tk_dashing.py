@@ -156,10 +156,22 @@ class tk_dashing(tk_window):
 					price_low = float(quote_group[j]['low'])
 
 				if (
+					match("^[0-9\.]+$", quote_group[j]['last']) and
+					float(quote_group[j]['last']) < price_low
+				):
+					price_low = float(quote_group[j]['last'])
+
+				if (
 					match("^[0-9\.]+$", quote_group[j]['high']) and
 					float(quote_group[j]['high']) > price_high
 				):
 					price_high = float(quote_group[j]['high'])
+
+				if (
+					match("^[0-9\.]+$", quote_group[j]['last']) and
+					float(quote_group[j]['last']) > price_high
+				):
+					price_high = float(quote_group[j]['last'])
 
 				data[j][0]['symbol'] = quote_group[j]['symbol']
 				data[j][0]['low'] = price_low
