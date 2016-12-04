@@ -20,6 +20,7 @@ from math import ceil, floor
 from multiprocessing import Manager, Process
 from os import unlink
 from os.path import exists
+from re import match
 
 import shared_data
 from tk_window import tk_window
@@ -137,10 +138,10 @@ class tk_dashing(tk_window):
 
 			for j in range(0, len(quote_group)):
 				if (
-					quote_group[j]['last'] != "N/A" and
-					quote_group[j]['open'] != "N/A" and
-					quote_group[j]['low'] != "N/A" and
-					quote_group[j]['high'] != "N/A"
+					not match("^[0-9\.]+$", quote_group[j]['last']) and
+					not match("^[0-9\.]+$", quote_group[j]['open']) and
+					not match("^[0-9\.]+$", quote_group[j]['low']) and
+					not match("^[0-9\.]+$", quote_group[j]['high'])
 				):
 					price_high = price_low = price_open = float(
 						quote_group[j]['open']
