@@ -139,23 +139,27 @@ class tk_dashing(tk_window):
 			for j in range(0, len(quote_group)):
 				price_low = price_high = price_open = 0
 
-				if (
-					not match("^[0-9\.]+$", quote_group[j]['last']) and
-					not match("^[0-9\.]+$", quote_group[j]['open']) and
-					not match("^[0-9\.]+$", quote_group[j]['low']) and
-					not match("^[0-9\.]+$", quote_group[j]['high'])
-				):
+				if match("^[0-9\.]+$", quote_group[j]['open']):
 					price_low = price_high = price_open = float(
 						quote_group[j]['open']
 					)
 
-					data[j][1].append(i)
+				data[j][1].append(i)
+
+				if match("^[0-9\.]+$", quote_group[j]['last']):
 					data[j][2].insert(0, float(quote_group[j]['last']))
 
-					if float(quote_group[j]['low']) < price_low:
-						price_low = float(quote_group[j]['low'])
-					elif float(quote_group[j]['high']) > price_high:
-						price_high = float(quote_group[j]['high'])
+				if (
+					match("^[0-9\.]+$", quote_group[j]['low']) and
+					float(quote_group[j]['low']) < price_low
+				):
+					price_low = float(quote_group[j]['low'])
+
+				if (
+					match("^[0-9\.]+$", quote_group[j]['high']) and
+					float(quote_group[j]['high']) > price_high
+				):
+					price_high = float(quote_group[j]['high'])
 
 				data[j][0]['symbol'] = quote_group[j]['symbol']
 				data[j][0]['low'] = price_low
@@ -197,10 +201,20 @@ class tk_dashing(tk_window):
 			ax.grid(True)
 
 			ax.plot(data[i][1], data[i][2], color='#FFFFFF', linewidth=2)
-			ax.set_ylim((price_low-price_offset, price_high+price_offset))
-			ax.set_ylabel('{} ({})'.format(
-				shared_data.stocks[data[i][0]['symbol']], data[i][2][0]
-			), fontsize=25)
+
+			# only set ylim if values aren't zero
+			if price_low != 0 and price_high != 0:
+				ax.set_ylim((price_low-price_offset, price_high+price_offset))
+
+			if len(data[i][2]) == 0:
+				ax.set_ylabel(
+					shared_data.stocks[data[i][0]['symbol']], fontsize=25
+				)
+			else:
+				ax.set_ylabel('{} ({})'.format(
+					shared_data.stocks[data[i][0]['symbol']], data[i][2][0]
+				), fontsize=25)
+
 			ax.tick_params('y',
 				direction='in', labelleft=False, labelright=True
 			)
