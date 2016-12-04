@@ -116,8 +116,10 @@ class tk_dashing(tk_window):
 		f.close()
 
 	def generate_dataplots(self, canvas_width, canvas_height):
-		if len(shared_data.quotes) == 0 or \
-		len(shared_data.quotes[0]) != shared_data.GRID_COUNT:
+		if (
+			len(shared_data.quotes) == 0 or
+			len(shared_data.quotes[0]) != shared_data.GRID_COUNT
+		):
 			self.finish_dataplots_thread()
 			return
 
@@ -134,11 +136,16 @@ class tk_dashing(tk_window):
 			quote_group = shared_data.quotes[i]
 
 			for j in range(0, len(quote_group)):
-				price_high = price_low = price_open = float(
-					quote_group[j]['open']
-				)
+				if (
+					quote_group[j]['last'] != "N/A" and
+					quote_group[j]['open'] != "N/A" and
+					quote_group[j]['low'] != "N/A" and
+					quote_group[j]['high'] != "N/A"
+				):
+					price_high = price_low = price_open = float(
+						quote_group[j]['open']
+					)
 
-				if quote_group[j]['last'] != "N/A":
 					data[j][1].append(i)
 					data[j][2].insert(0, float(quote_group[j]['last']))
 
