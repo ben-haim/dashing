@@ -1,5 +1,13 @@
 #!/usr/bin/env python
 
+#
+# Dashing - tk_dashing.py
+#
+# Author: Brad Cable
+# Email: brad@bcable.net
+# License: GPLv2
+#
+
 from Tkinter import Tk, END, Canvas, Frame, Text
 from ttk import Label, LabelFrame
 from tkFont import Font

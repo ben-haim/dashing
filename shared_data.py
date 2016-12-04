@@ -1,5 +1,13 @@
 #!/usr/bin/env python
 
+#
+# Dashing - shared_data.py
+#
+# Author: Brad Cable
+# Email: brad@bcable.net
+# License: GPLv2
+#
+
 import ConfigParser
 import feedparser
 import pycurl, cStringIO
