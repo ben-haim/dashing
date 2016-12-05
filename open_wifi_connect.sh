@@ -27,7 +27,7 @@ ifconfig $interface up
 # test connection
 function testcon(){
 	if [[ ! -z "$(
-		wget -q -O - "http://yahoo.com/" | grep "s.yimg.com"
+		wget --timeout=5 -q -O - "http://yahoo.com/" | grep "s.yimg.com"
 	)" ]]; then
 		echo -n 0
 	else
@@ -76,7 +76,7 @@ for ((;;)); do
 			# specify ESSID and AP
 			iwconfig $interface essid $essid ap $bss
 			# acquire DHCP config
-			dhclient $interface
+			dhclient -1 $interface
 			# wait a bit
 			sleep 1
 
