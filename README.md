@@ -1,5 +1,8 @@
-Dashing
-=======
+Dashing 1.0.0
+=============
+
+Dashing is a project that displays stock graphs, ticker information, and market headlines in a fullscreen dashboard that is designed for use either on a Raspberry Pi or on desktop Linux.
+
 
 How to install on Raspberry Pi
 ------------------------------
