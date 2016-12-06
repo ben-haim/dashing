@@ -39,7 +39,7 @@ https://www.raspberrypi.org/documentation/installation/installing-images/README.
 
     # apt-get install git lightdm openbox python-feedparser python-matplotlib python-pil python-pil.imagetk python-pycurl python-tk unclutter x11-xserver-utils
 
-**6)** Enable lightdm (the lightweight desktop manager):
+**6)** Enable lightdm (the Light Display Manager):
 
     # systemctl enable lightdm
 
