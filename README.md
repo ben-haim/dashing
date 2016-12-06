@@ -7,7 +7,7 @@ Dashing is a project that displays stock graphs, ticker information, and market 
 How to install on Raspberry Pi
 ------------------------------
 
-1) Create a fresh Raspbian Lite SD card.  Download from here:
+**1)** Create a fresh Raspbian Lite SD card.  Download from here:
 
 https://www.raspberrypi.org/downloads/raspbian/
 
@@ -24,52 +24,52 @@ On Windows or MacOS, follow these steps:
 
 https://www.raspberrypi.org/documentation/installation/installing-images/README.md
 
-2) Put the SD card into the system, make sure you are connected to the internet with an ethernet cord, then boot your Raspberry Pi.  Login as the "pi" user with password "raspberry".
+**2)** Put the SD card into the system, make sure you are connected to the internet with an ethernet cord, then boot your Raspberry Pi.  Login as the "pi" user with password "raspberry".
 
-3) Start a root shell:
+**3)** Start a root shell:
 
     $ sudo -s
 
-4) Update the system:
+**4)** Update the system:
 
     # apt-get update
     # apt-get dist-upgrade
 
-5) Install required packages for Dashing to work correctly:
+**5)** Install required packages for Dashing to work correctly:
 
     # apt-get install git lightdm openbox python-feedparser python-matplotlib python-pil python-pil.imagetk python-pycurl python-tk unclutter x11-xserver-utils
 
-6) Enable lightdm (the lightweight desktop manager):
+**6)** Enable lightdm (the lightweight desktop manager):
 
     # systemctl enable lightdm
 
-7) Disable networking tools that will mess with the open WiFi scripts if you intend to have your Pi connect to any open WiFi.  If you are intending to use a wired connection or manually configure a private WiFi, skip this step.
+**7)** Disable networking tools that will mess with the open WiFi scripts if you intend to have your Pi connect to any open WiFi.  If you are intending to use a wired connection or manually configure a private WiFi, skip this step.
 
     # systemctl disable networking
     # systemctl disable dhcpcd
 
-8) Edit /etc/lightdm/lightdm.conf and change the following values, they are probably commented or set to something else, you can use vi or nano for this:
+**8)** Edit /etc/lightdm/lightdm.conf and change the following values, they are probably commented or set to something else, you can use vi or nano for this:
 
     autologin-user-timeout=0
     user-session=openbox
 
-9) Exit your root shell:
+**9)** Exit your root shell:
 
     # exit
 
-10) Ensure you are in your home directory:
+**10)** Ensure you are in your home directory:
 
     $ cd /home/pi
 
-11) Clone the Dashing repository into your home directory:
+**11)** Clone the Dashing repository into your home directory:
 
     $ git clone https://github.com/BCable/dashing.git
 
-12) Create the openbox configuration directory:
+**12)** Create the openbox configuration directory:
 
     $ mkdir /home/pi/.config/openbox
 
-13) Edit or create /home/pi/.config/openbox/rc.xml with nano or vi, and set the contents to:
+**13)** Edit or create /home/pi/.config/openbox/rc.xml with nano or vi, and set the contents to:
 
     <openbox_config>
         <applications>
@@ -80,7 +80,7 @@ https://www.raspberrypi.org/documentation/installation/installing-images/README.
         </applications>
     </openbox_config>
 
-14) Edit or create /home/pi/.config/openbox/autostart with nano or vi, and set the contents to the following.  Note, if you are intending this device to be wired instead of wireless, remove the first line:
+**14)** Edit or create /home/pi/.config/openbox/autostart with nano or vi, and set the contents to the following.  Note, if you are intending this device to be wired instead of wireless, remove the first line:
 
     sudo bash /home/pi/dashing/open_wifi_connect.sh &
     xset -dpms
@@ -90,7 +90,7 @@ https://www.raspberrypi.org/documentation/installation/installing-images/README.
     unclutter -noevents -grab &
     python /home/pi/dashing/dashing.py &
 
-15) Reboot your Raspberry Pi and wait until the device connects and starts up.
+**15)** Reboot your Raspberry Pi and wait until the device connects and starts up.
 
 
 Configuration File
