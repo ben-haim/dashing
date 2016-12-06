@@ -11,7 +11,7 @@ How to install on Raspberry Pi
 
 https://www.raspberrypi.org/downloads/raspbian/
 
-On Linux, this is a few commands:
+On Linux, extracting and installing to an SD card is just a few commands:
 
     # sha1sum 2016-11-25-raspbian-jessie-lite.zip
 
@@ -43,7 +43,7 @@ https://www.raspberrypi.org/documentation/installation/installing-images/README.
 
     # systemctl enable lightdm
 
-7) Disable networking tools that will mess with the open WiFi scripts if you intend to connect to any open WiFi.  If you are intending to use a wired connection, skip this step.
+7) Disable networking tools that will mess with the open WiFi scripts if you intend to have your Pi connect to any open WiFi.  If you are intending to use a wired connection or manually configure a private WiFi, skip this step.
 
     # systemctl disable networking
     # systemctl disable dhcpcd
@@ -115,7 +115,7 @@ Each feed must be named in numerical order named "feeds0", "feeds1", etc.
     [stocks]
     tickers0 = NAME::SYMBOL
 
-This is in the format of the name for the stock as displayed, and the symbol associated with the data.  You can look up symbols on [Yahoo Finance](https://finance.yahoo.com/), since this uses the Yahoo Finance API.
+This is in the format of the name for the stock as displayed, and the symbol associated with the data.  You can look up symbols on [Yahoo Finance](https://finance.yahoo.com/), since Dashing uses the Yahoo Finance API.
 
 Each symbol must be named in numerical order named "tickers0", "tickers1", etc.  You should configure an amount of symbols that can create an even grid (5x5, 4x5, 6x6, 8x8, 8x7, etc), otherwise the display will look strange.
 
@@ -133,6 +133,6 @@ Using Debian or Ubuntu packages, these are very similar to the ones in the Raspb
 
     # apt-get install python-feedparser python-matplotlib python-pil python-pil.imagetk python-pycurl python-tk
 
-After the required packages are installed, you can start the script from a clone repository with a simple:
+After the required packages are installed, you can start the script from a cloned repository with a simple:
 
     $ python dashing.py
